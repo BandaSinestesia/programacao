@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sobre o Inefável — Sinestesia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #f0ead8;
+    --warm-white: #f7f2e6;
+    --parchment: #e8dfc6;
+    --sepia: #c4a882;
+    --brown: #8a6a45;
+    --rust: #9b4f2a;
+    --muted-rust: #c47a5a;
+    --deep: #120e08;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--deep);
+    color: var(--cream);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 100svh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url("./fotos/Araucarias.jpeg");
+    background-size: cover;
+    background-position: center 67%;
+    filter: brightness(0.6) saturate(0.7);
+  }
+
+  /* dark gradient from bottom */
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(18,14,8,0.75) 0%,
+      rgba(18,14,8,0.2) 22%,
+      rgba(18,14,8,0.0) 40%,
+      rgba(18,14,8,0.0) 60%,
+      rgba(18,14,8,0.55) 78%,
+      rgba(18,14,8,0.97) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 100svh;
+  }
+
+  .hero-top {
+    padding: 3.5rem 2rem 0;
+    text-align: center;
+  }
+
+  .hero-bottom {
+    margin-top: auto;
+    padding: 0 2rem 4.5rem;
+    text-align: center;
+  }
+
+  .hero-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 200;
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--sepia);
+    margin-bottom: 1rem;
+    opacity: 0.8;
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 11vw, 5.5rem);
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    line-height: 1.0;
+    color: var(--warm-white);
+    margin-bottom: 0.4rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--parchment);
+  }
+
+  .hero-subtitle {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 200;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin: 1rem 0 2rem;
+    line-height: 1.8;
+    max-width: 32ch;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0.85;
+  }
+
+  .hero-divider {
+    width: 40px;
+    height: 1px;
+    background: var(--sepia);
+    margin: 0 auto 1.8rem;
+    opacity: 0.4;
+  }
+
+  .hero-intro {
+    font-size: clamp(0.95rem, 3.2vw, 1.1rem);
+    font-style: italic;
+    color: var(--parchment);
+    max-width: 36ch;
+    margin: 0 auto 2.5rem;
+    line-height: 1.8;
+    opacity: 0.85;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-decoration: none;
+    border: 1px solid rgba(196,168,130,0.4);
+    padding: 0.85rem 2rem;
+    position: relative;
+    transition: all 0.4s ease;
+    background: transparent;
+  }
+
+  .btn-primary::before, .btn-primary::after {
+    content: '';
+    position: absolute;
+    width: 7px; height: 7px;
+    border-color: var(--sepia);
+    border-style: solid;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+  }
+  .btn-primary::before { top:-1px; left:-1px; border-width: 1px 0 0 1px; }
+  .btn-primary::after  { bottom:-1px; right:-1px; border-width: 0 1px 1px 0; }
+  .btn-primary:hover {
+    background: rgba(196,168,130,0.08);
+    border-color: rgba(196,168,130,0.7);
+    letter-spacing: 0.38em;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    opacity: 0.3;
+    z-index: 2;
+  }
+  .hero-scroll span {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.5rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--sepia);
+  }
+  .scroll-line {
+    width: 1px; height: 28px;
+    background: linear-gradient(to bottom, var(--sepia), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%,100% { opacity:0.3; } 50% { opacity:0.9; }
+  }
+
+  /* ---- SECTIONS ---- */
+  .section {
+    padding: 5rem 2rem;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .section-marker {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .section-num {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    color: var(--sepia);
+    opacity: 0.55;
+  }
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(196,168,130,0.2), transparent);
+  }
+
+  .eixo-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 200;
+    font-size: 0.58rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--sepia);
+    margin-bottom: 0.6rem;
+    opacity: 0.65;
+  }
+  .eixo-title {
+    font-size: clamp(1.7rem, 7vw, 2.4rem);
+    font-weight: 300;
+    color: var(--warm-white);
+    line-height: 1.12;
+    margin-bottom: 1.4rem;
+  }
+  .eixo-title em { font-style: italic; color: var(--parchment); }
+  .eixo-intro {
+    font-size: 0.98rem;
+    font-style: italic;
+    color: var(--parchment);
+    opacity: 0.78;
+    line-height: 1.82;
+    margin-bottom: 2.8rem;
+  }
+
+  /* ---- CARDS ---- */
+  .music-cards { display: flex; flex-direction: column; gap: 1.4rem; }
+  .music-card {
+    border: 1px solid rgba(196,168,130,0.11);
+    padding: 1.4rem 1.4rem 1.2rem;
+    position: relative;
+    background: rgba(255,255,255,0.012);
+    transition: background 0.4s;
+  }
+  .music-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--rust), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .music-card:hover { background: rgba(155,79,42,0.04); }
+  .music-card:hover::before { opacity: 0.5; }
+
+  .card-year {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.28em;
+    color: var(--sepia);
+    opacity: 0.55;
+    margin-bottom: 0.35rem;
+  }
+  .card-title {
+    font-size: clamp(1.2rem, 4.5vw, 1.5rem);
+    font-weight: 400;
+    color: var(--warm-white);
+    line-height: 1.2;
+    margin-bottom: 0.18rem;
+  }
+  .card-artist {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--sepia);
+    margin-bottom: 0.9rem;
+    opacity: 0.8;
+  }
+  .card-desc {
+    font-size: 0.9rem;
+    color: var(--parchment);
+    opacity: 0.68;
+    line-height: 1.72;
+    margin-bottom: 1.2rem;
+  }
+  .card-actions { display: flex; gap: 0.7rem; flex-wrap: wrap; }
+  .btn-sm {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 300;
+    font-size: 0.56rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.48rem 1rem;
+    border: 1px solid rgba(196,168,130,0.28);
+    color: var(--sepia);
+    transition: all 0.3s;
+    background: transparent;
+    cursor: pointer;
+    display: inline-block;
+  }
+  .btn-sm:hover { border-color: rgba(196,168,130,0.65); color: var(--cream); background: rgba(196,168,130,0.05); }
+  .btn-sm.accent { border-color: rgba(155,79,42,0.38); color: var(--muted-rust); }
+  .btn-sm.accent:hover { border-color: var(--rust); color: var(--cream); background: rgba(155,79,42,0.07); }
+
+  /* ---- SEPARATOR ---- */
+  .sep {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    padding: 0 2rem;
+    max-width: 480px;
+    margin: 0 auto;
+    opacity: 0.18;
+  }
+  .sep-line { flex:1; height:1px; background:var(--sepia); }
+  .sep-dot  { width:3px; height:3px; border-radius:50%; background:var(--sepia); flex-shrink:0; }
+
+  /* ---- FOTO DA BANDA ---- */
+  .banda-foto {
+    max-width: 480px;
+    margin: 4rem auto 0;
+    padding: 0 2rem;
+    position: relative;
+  }
+  .banda-foto img {
+    width: 100%;
+    display: block;
+    filter: sepia(0.35) brightness(0.88) saturate(0.75);
+  }
+  .banda-foto::after {
+    content: '';
+    position: absolute;
+    inset: 0 2rem 0 2rem;
+    border: 1px solid rgba(196,168,130,0.15);
+    pointer-events: none;
+  }
+
+  /* ---- SOBRE O PROJETO ---- */
+  .sobre {
+    padding: 4rem 2rem 5rem;
+    max-width: 480px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .sobre-label {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--sepia);
+    opacity: 0.55;
+    margin-bottom: 1.4rem;
+  }
+  .sobre-text {
+    font-size: clamp(1rem, 3.4vw, 1.12rem);
+    font-style: italic;
+    color: var(--parchment);
+    opacity: 0.8;
+    line-height: 1.88;
+  }
+
+  /* ---- FOOTER ---- */
+  footer {
+    border-top: 1px solid rgba(196,168,130,0.09);
+    padding: 2.5rem 2rem;
+    text-align: center;
+  }
+  .footer-band {
+    font-size: clamp(1.1rem, 4vw, 1.4rem);
+    font-weight: 300;
+    color: var(--warm-white);
+    margin-bottom: 0.25rem;
+  }
+  .footer-sub {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 0.58rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--sepia);
+    opacity: 0.45;
+    margin-bottom: 1.5rem;
+  }
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  .social-icons a {
+    color: var(--sepia);
+    opacity: 0.45;
+    text-decoration: none;
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: center;
+  }
+  .social-icons a:hover { opacity: 1; }
+  .social-icons svg { width: 18px; height: 18px; fill: currentColor; }
+
+  /* ---- ANIMATIONS ---- */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.25s; }
+  .delay-3 { transition-delay: 0.4s; }
+  .delay-4 { transition-delay: 0.55s; }
+  .delay-5 { transition-delay: 0.7s; }
+</style>
+</head>
+<body>
+
+<!-- HERO com foto de fundo -->
+<section class="hero">
+  <div class="hero-bg"></div>
+
+  <div class="hero-content fade-up visible">
+    <div class="hero-top">
+      <p class="hero-label">Sinestesia · Prática Artística 2026</p>
+      <h1 class="hero-title">Sobre o<br><em>Inefável</em></h1>
+    </div>
+    <div class="hero-bottom">
+      <p class="hero-subtitle">Uma apresentação musical sobre identidade,<br>mudança e sentimentos</p>
+      <a href="https://open.spotify.com/playlist/1UMnisf25g3Z91zL9XbTYW?si=REPSerTYRJGqP_RTCy-RjA" class="btn-primary" target="_blank" rel="noopener">Ouvir a Playlist</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- EIXO 1 -->
+<section class="section" id="eixo1">
+  <div class="section-marker">
+    <span class="section-num">I</span>
+    <div class="section-line"></div>
+  </div>
+  <p class="eixo-label fade-up">Eixo 1</p>
+  <h2 class="eixo-title fade-up delay-1">Busca pela<br><em>Identidade</em></h2>
+  <p class="eixo-intro fade-up delay-2">As músicas deste eixo abordam a construção da identidade, transformação pessoal e os caminhos que escolhemos ou deixamos de seguir.</p>
+
+  <div class="music-cards">
+    <article class="music-card fade-up delay-2">
+      <p class="card-year">1972</p>
+      <h3 class="card-title">Tudo o Que Você Podia Ser</h3>
+      <p class="card-artist">Milton Nascimento e Lô Borges</p>
+      <p class="card-desc">Lançada durante a ditadura militar, a música reflete sobre possibilidades interrompidas, sonhos não realizados e os caminhos que poderíamos ter seguido.</p>
+      <div class="card-actions">
+        <a href="https://open.spotify.com/intl-pt/track/4YwIblyn5m2XAJ7ljh5d79?si=80ff299d24764b2e" class="btn-sm accent" target="_blank" rel="noopener">Ouvir no Spotify</a>
+        <a href="https://www.letras.mus.br/milton-nascimento/47457/" class="btn-sm" target="_blank" rel="noopener">Ver letra</a>
+      </div>
+    </article>
+
+    <article class="music-card fade-up delay-3">
+      <p class="card-year">1972</p>
+      <h3 class="card-title">Mistério do Planeta</h3>
+      <p class="card-artist">Novos Baianos</p>
+      <p class="card-desc">Uma celebração da transformação e da descoberta constante. A música apresenta a identidade não como algo fixo, mas como um processo contínuo.</p>
+      <div class="card-actions">
+        <a href="https://open.spotify.com/intl-pt/track/0a3dxCb5m9uJ7J66d2h63u?si=c6f707b0b96942ea" class="btn-sm accent" target="_blank" rel="noopener">Ouvir no Spotify</a>
+        <a href="https://www.letras.mus.br/os-novos-baianos/122202/" class="btn-sm" target="_blank" rel="noopener">Ver letra</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div class="sep"><div class="sep-line"></div><div class="sep-dot"></div><div class="sep-line"></div></div>
+
+<!-- EIXO 2 -->
+<section class="section" id="eixo2">
+  <div class="section-marker">
+    <span class="section-num">II</span>
+    <div class="section-line"></div>
+  </div>
+  <p class="eixo-label fade-up">Eixo 2</p>
+  <h2 class="eixo-title fade-up delay-1">Imprevisibilidade<br>dos <em>Sentimentos</em></h2>
+  <p class="eixo-intro fade-up delay-2">Nem tudo aquilo que sentimos pode ser explicado com clareza. Este eixo reúne músicas que exploram o amor, o tempo, a impermanência e as emoções que escapam às definições simples.</p>
+
+  <div class="music-cards">
+    <article class="music-card fade-up delay-2">
+      <p class="card-year">1969</p>
+      <h3 class="card-title">Something</h3>
+      <p class="card-artist">The Beatles</p>
+      <p class="card-desc">Composta por George Harrison, a canção fala sobre um amor que existe mesmo sem poder ser completamente explicado.</p>
+      <div class="card-actions">
+        <a href="https://open.spotify.com/intl-pt/track/0pNeVovbiZHkulpGeOx1Gj?si=91d793e67b674c00" class="btn-sm accent" target="_blank" rel="noopener">Ouvir no Spotify</a>
+        <a href="https://www.letras.mus.br/the-beatles/200/" class="btn-sm" target="_blank" rel="noopener">Ver letra</a>
+      </div>
+    </article>
+
+    <article class="music-card fade-up delay-3">
+      <p class="card-year">2005</p>
+      <h3 class="card-title">O Vento</h3>
+      <p class="card-artist">Los Hermanos</p>
+      <p class="card-desc">Uma reflexão sobre a passagem do tempo, as mudanças inevitáveis da vida e a dificuldade de compreender certas experiências enquanto elas acontecem.</p>
+      <div class="card-actions">
+        <a href="https://open.spotify.com/intl-pt/track/4PCyzOTAB7zfJaxaS1uLSY?si=5af988a2dca04b18" class="btn-sm accent" target="_blank" rel="noopener">Ouvir no Spotify</a>
+        <a href="https://www.letras.mus.br/los-hermanos/173255/" class="btn-sm" target="_blank" rel="noopener">Ver letra</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<div class="sep"><div class="sep-line"></div><div class="sep-dot"></div><div class="sep-line"></div></div>
+
+<!-- FOTO COM CASINHA AMARELA -->
+<div class="banda-foto fade-up">
+    <img src="/fotos/casaAmarela.jpeg" alt="">
+</div>
+
+<!-- SOBRE O PROJETO -->
+<section class="sobre" id="projeto">
+  <p class="sobre-label fade-up">Sobre o projeto</p>
+  <p class="sobre-text fade-up delay-1">O projeto surgiu a partir da reflexão sobre experiências de mudança, adaptação e descoberta vividas pelos integrantes da banda durante sua trajetória recente. A seleção do repertório buscou reunir músicas que dialogassem com essas questões e com o conceito do inefável.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-band fade-up">Sinestesia</p>
+  <p class="footer-sub fade-up delay-1">Prática Artística · UFPR · 2026</p>
+  <div class="social-icons fade-up delay-2">
+   
+    <a href="https://open.spotify.com/playlist/1UMnisf25g3Z91zL9XbTYW?si=REPSerTYRJGqP_RTCy-RjA" aria-label="Spotify da banda" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+    </a>
+    
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up:not(.visible)').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
